@@ -20,7 +20,6 @@ jobs:
           php-version: '8.1'
 
       - name: Check PHP Syntax (Lint)
-        # Esto buscará errores de sintaxis en tus archivos .php (api_datos, GBMEngine, etc)
         run: find . -maxdepth 1 -name "*.php" -print0 | xargs -0 -n1 php -l
 
   frontend-check:
@@ -38,11 +37,9 @@ jobs:
           cache-dependency-path: Simulador_de_jubilacion/package-lock.json
 
       - name: Install Dependencies
-        run: |
-          cd Simulador_de_jubilacion
-          npm ci
+        run: npm ci
+        working-directory: ./Simulador_de_jubilacion
 
       - name: Build React Project
-        run: |
-          cd Simulador_de_jubilacion
-          npm run build
+        run: npm run build
+        working-directory: ./Simulador_de_jubilacion
