@@ -1,4 +1,5 @@
-﻿# **📈 Monte Carlo Retirement Simulator**
+![CI Status](https://github.com/ralmher95/montecarlo-simulator/actions/workflows/main_check.yml/badge.svg)
+ # **📈 Monte Carlo Retirement Simulator**
 Este proyecto es una herramienta avanzada de simulación financiera que utiliza el **Método de Monte Carlo** para proyectar la viabilidad de un plan de jubilación. A diferencia de las calculadoras lineales, este motor analiza múltiples escenarios (Peor, Normal y Mejor) basándose en variables de ahorro, gasto y rentabilidad.
 ## **🚀 Características Principales**
 - **Motor de Simulación Probabilística:** Backend robusto en PHP (RetirementEngine.php) que procesa proyecciones financieras complejas.
