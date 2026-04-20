@@ -1,0 +1,265 @@
+/* ─── Layout general ─────────────────────────────────── */
+body {
+  background-color: #000;
+}
+.mc-wrapper {
+  width: 100%;
+  background-color: #000;
+  padding: 20px;
+  color: white;
+  font-family: sans-serif;
+}
+
+/* ─── Cabecera ───────────────────────────────────────── */
+.mc-header {
+  margin-bottom: 24px;
+}
+
+.mc-header h2 {
+  color: #00ffcc;
+  margin: 0;
+}
+
+.mc-header p {
+  color: #555;
+  margin-top: 6px;
+  font-size: 13px;
+}
+
+.mc-header p strong {
+  color: #00ffcc;
+}
+
+/* ─── Panel de parámetros ────────────────────────────── */
+.mc-params-panel {
+  background-color: #0a0a0a;
+  border: 1px solid #1a1a1a;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 28px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+/* ─── ParamField ─────────────────────────────────────── */
+.param-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.param-field__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.param-field__label {
+  color: #aaa;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.param-field__value {
+  color: #00ffcc;
+  font-size: 14px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.param-field__range {
+  width: 100%;
+  accent-color: #00ffcc;
+  cursor: pointer;
+}
+
+.param-field__description {
+  color: #444;
+  font-size: 11px;
+}
+
+/* ─── Botón Simular ──────────────────────────────────── */
+.mc-simulate-btn-wrapper {
+  display: flex;
+  align-items: flex-end;
+}
+
+.mc-simulate-btn {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  transition: all 0.2s;
+}
+
+.mc-simulate-btn--idle {
+  background-color: #00ffcc;
+  color: #000;
+  cursor: pointer;
+}
+
+.mc-simulate-btn--loading {
+  background-color: #003322;
+  color: #00ffcc;
+  cursor: not-allowed;
+}
+
+/* ─── Loading ────────────────────────────────────────── */
+.mc-loading {
+  color: #00ffcc;
+  padding: 60px;
+  text-align: center;
+  font-size: 15px;
+}
+
+/* ─── Panel año seleccionado ─────────────────────────── */
+.mc-selected-panel {
+  margin-top: 30px;
+  background-color: #0a0a0a;
+  border: 1px solid #1a1a1a;
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.mc-selected-panel__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.mc-selected-panel__age-label {
+  color: #555;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.mc-selected-panel__age-value {
+  font-size: 32px;
+  font-weight: bold;
+  color: #fff;
+}
+
+.mc-selected-panel__age-unit {
+  font-size: 16px;
+  color: #555;
+}
+
+.mc-selected-panel__clear-btn {
+  background: transparent;
+  border: 1px solid #333;
+  color: #555;
+  padding: 8px 14px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.mc-scenarios-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.mc-scenario-card {
+  border-radius: 6px;
+  padding: 16px;
+}
+
+.mc-scenario-card__title {
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.mc-scenario-card__sublabel {
+  color: #555;
+  font-size: 11px;
+  margin-bottom: 12px;
+}
+
+.mc-scenario-card__amount {
+  font-size: 22px;
+  font-weight: bold;
+}
+
+/* ─── Placeholder sin selección ─────────────────────── */
+.mc-no-selection {
+  margin-top: 20px;
+  color: #333;
+  text-align: center;
+  padding: 20px;
+  border: 1px dashed #1a1a1a;
+  border-radius: 6px;
+  font-size: 13px;
+}
+
+/* ─── Tabla de estrés ────────────────────────────────── */
+.mc-stress-table-section {
+  margin-top: 40px;
+}
+
+.mc-stress-table-section h3 {
+  color: #00ffcc;
+  border-bottom: 1px solid #1a1a1a;
+  padding-bottom: 10px;
+  font-size: 15px;
+}
+
+.mc-stress-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+  text-align: left;
+}
+
+.mc-stress-table thead tr {
+  color: #555;
+  border-bottom: 2px solid #1a1a1a;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.mc-stress-table th {
+  padding: 12px;
+}
+
+.mc-stress-table tbody tr {
+  border-bottom: 1px solid #111;
+}
+
+.mc-stress-table td {
+  padding: 12px;
+}
+
+.mc-stress-table__age-cell {
+  font-weight: bold;
+  color: #00ffcc;
+}
+
+.mc-stress-table__worst--negative {
+  color: #ff4d4d;
+}
+
+.mc-stress-table__worst--positive {
+  color: #eee;
+}
+
+.mc-stress-table__worst-tag {
+  font-size: 11px;
+}
+
+.mc-stress-table__normal {
+  color: #ffcc00;
+}
+
+.mc-stress-table__best {
+  color: #00ffcc;
+}

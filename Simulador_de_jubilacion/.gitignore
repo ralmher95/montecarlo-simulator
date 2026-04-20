@@ -1,0 +1,32 @@
+Set-Content .gitignore "
+# Dependencias
+node_modules/
+frontend/node_modules/
+Simulador_de_jubilacion/node_modules/
+
+# Entorno y Logs
+.env
+*.log
+npm-debug.log*
+.DS_Store
+
+# Directorios de compilación
+dist/
+frontend/dist/
+Simulador_de_jubilacion/dist/
+
+# Archivos de Datos/Scripts Personales (Ruido)
+conver.py
+montecarlo.txt
+test_repositorio.php
+
+# Editores
+.vscode/
+.idea/
+"
+node_modules/
+.env
+*.log
+.DS_Store
+dist/
+build/
