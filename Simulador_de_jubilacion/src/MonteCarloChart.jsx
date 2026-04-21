@@ -66,6 +66,9 @@ const MonteCarloChart = () => {
     const fetchData = useCallback((p) => {
     setLoading(true);
     setSelectedYear(null);
+    const fetchData = useCallback((p) => {
+    setLoading(true);
+    setSelectedYear(null);
     const query = new URLSearchParams({
       ahorros:         p.ahorros,
       ahorro_anual:    p.ahorro_anual,
