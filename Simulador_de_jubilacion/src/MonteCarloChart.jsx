@@ -63,12 +63,6 @@ const MonteCarloChart = () => {
   const fetchData = useCallback((p) => {
     setLoading(true);
     setSelectedYear(null);
-    const fetchData = useCallback((p) => {
-    setLoading(true);
-    setSelectedYear(null);
-    const fetchData = useCallback((p) => {
-    setLoading(true);
-    setSelectedYear(null);
     const query = new URLSearchParams({
       ahorros:         p.ahorros,
       ahorro_anual:    p.ahorro_anual,
@@ -171,173 +165,68 @@ const MonteCarloChart = () => {
 
   return (
     <div className="mc-wrapper">
-
-      {/* CABECERA */}
       <div className="mc-header">
         <h2>Simulación de Jubilación</h2>
-        <p>
-          Ajusta los parámetros y pulsa <strong>Simular</strong> para recalcular.
-          Haz clic en la gráfica para ver el desglose por escenarios.
-        </p>
+        <p>Ajusta los parámetros y pulsa <strong>Simular</strong> para recalcular. Haz clic en la gráfica para ver el desglose por escenarios.</p>
       </div>
 
-      {/* PANEL DE PARÁMETROS */}
       <div className="mc-params-panel">
-        <ParamField
-          label="Ahorros actuales"
-          description="Capital que tienes ahorrado hoy"
-          value={pendingParams.ahorros}
-          onChange={setPending('ahorros')}
-          min={0} max={500000} step={1000}
-          format={fmtEur}
-        />
-        <ParamField
-          label="Ahorro anual"
-          description="Cuánto ahorras cada año"
-          value={pendingParams.ahorro_anual}
-          onChange={setPending('ahorro_anual')}
-          min={0} max={50000} step={500}
-          format={fmtEur}
-        />
-        <ParamField
-          label="Gasto anual (hoy)"
-          description="Lo que querrás gastar al jubilarte, en dinero de hoy"
-          value={pendingParams.gasto_anual}
-          onChange={setPending('gasto_anual')}
-          min={0} max={100000} step={500}
-          format={fmtEur}
-        />
-        <ParamField
-          label="Edad actual"
-          value={pendingParams.edad_actual}
-          onChange={setPending('edad_actual')}
-          min={18} max={64} step={1}
-          format={(v) => `${v} años`}
-        />
-        <ParamField
-          label="Edad de jubilación"
-          value={pendingParams.edad_jubilacion}
-          onChange={setPending('edad_jubilacion')}
-          min={pendingParams.edad_actual + 1} max={80} step={1}
-          format={(v) => `${v} años`}
-        />
-        <ParamField
-          label="Rentabilidad media"
-          description="Rentabilidad anual esperada (ej: 7% → bolsa indexada)"
-          value={pendingParams.rentabilidad}
-          onChange={setPending('rentabilidad')}
-          min={0.01} max={0.20} step={0.001}
-          format={fmtPct}
-        />
-        <ParamField
-          label="Volatilidad (riesgo)"
-          description="Desviación típica anual del mercado"
-          value={pendingParams.volatilidad}
-          onChange={setPending('volatilidad')}
-          min={0.01} max={0.50} step={0.005}
-          format={fmtPct}
-        />
-        <ParamField
-          label="Inflación estimada"
-          value={pendingParams.inflacion}
-          onChange={setPending('inflacion')}
-          min={0.005} max={0.10} step={0.001}
-          format={fmtPct}
-        />
+        <ParamField label="Ahorros actuales" description="Capital que tienes ahorrado hoy" value={pendingParams.ahorros} onChange={setPending('ahorros')} min={0} max={500000} step={1000} format={fmtEur} />
+        <ParamField label="Ahorro anual" description="Cuánto ahorras cada año" value={pendingParams.ahorro_anual} onChange={setPending('ahorro_anual')} min={0} max={50000} step={500} format={fmtEur} />
+        <ParamField label="Gasto anual (hoy)" description="Lo que querrás gastar al jubilarte, en dinero de hoy" value={pendingParams.gasto_anual} onChange={setPending('gasto_anual')} min={0} max={100000} step={500} format={fmtEur} />
+        <ParamField label="Edad actual" value={pendingParams.edad_actual} onChange={setPending('edad_actual')} min={18} max={64} step={1} format={(v) => `${v} años`} />
+        <ParamField label="Edad de jubilación" value={pendingParams.edad_jubilacion} onChange={setPending('edad_jubilacion')} min={pendingParams.edad_actual + 1} max={80} step={1} format={(v) => `${v} años`} />
+        <ParamField label="Rentabilidad media" description="Rentabilidad anual esperada (ej: 7% → bolsa indexada)" value={pendingParams.rentabilidad} onChange={setPending('rentabilidad')} min={0.01} max={0.20} step={0.001} format={fmtPct} />
+        <ParamField label="Volatilidad (riesgo)" description="Desviación típica anual del mercado" value={pendingParams.volatilidad} onChange={setPending('volatilidad')} min={0.01} max={0.50} step={0.005} format={fmtPct} />
+        <ParamField label="Inflación estimada" value={pendingParams.inflacion} onChange={setPending('inflacion')} min={0.005} max={0.10} step={0.001} format={fmtPct} />
 
-        {/* BOTÓN SIMULAR */}
         <div className="mc-simulate-btn-wrapper">
-          <button
-            onClick={handleApply}
-            disabled={loading}
-            className={`mc-simulate-btn ${loading ? 'mc-simulate-btn--loading' : 'mc-simulate-btn--idle'}`}
-          >
+          <button onClick={handleApply} disabled={loading} className={`mc-simulate-btn ${loading ? 'mc-simulate-btn--loading' : 'mc-simulate-btn--idle'}`}>
             {loading ? 'Simulando...' : '▶ Simular'}
           </button>
         </div>
       </div>
 
-      {/* GRÁFICA */}
       {loading ? (
         <div className="mc-loading">Cargando simulación...</div>
       ) : (
         <ResponsiveContainer width="100%" height={450}>
           <LineChart data={data} onClick={handleChartClick} style={{ cursor: 'crosshair' }}>
             <CartesianGrid strokeDasharray="3 3" stroke="#1a1a1a" vertical={false} />
-            <XAxis
-              dataKey="step"
-              stroke="#444"
-              tick={{ fill: '#555', fontSize: 12 }}
-              label={{ value: 'Edad', position: 'insideBottom', offset: -5, fill: '#555', fontSize: 12 }}
-            />
-            <YAxis
-              stroke="#444"
-              tick={{ fill: '#555', fontSize: 12 }}
-              tickFormatter={(value) => `${(value / 1000).toFixed(0)}k€`}
-            />
-            <Tooltip
-              content={<CustomTooltip medianKey={medianKey} />}
-              cursor={{ stroke: '#333', strokeWidth: 1 }}
-            />
+            <XAxis dataKey="step" stroke="#444" tick={{ fill: '#555', fontSize: 12 }} label={{ value: 'Edad', position: 'insideBottom', offset: -5, fill: '#555', fontSize: 12 }} />
+            <YAxis stroke="#444" tick={{ fill: '#555', fontSize: 12 }} tickFormatter={(value) => `${(value / 1000).toFixed(0)}k€`} />
+            <Tooltip content={<CustomTooltip medianKey={medianKey} />} cursor={{ stroke: '#333', strokeWidth: 1 }} />
             {trajectoryLines}
             {medianKey && (
-              <Line
-                key="median-line"
-                type="monotone"
-                dataKey={medianKey}
-                stroke="#ffffff"
-                strokeWidth={2}
-                dot={false}
-                opacity={0.9}
-                isAnimationActive={false}
-                legendType="none"
-              />
+              <Line key="median-line" type="monotone" dataKey={medianKey} stroke="#ffffff" strokeWidth={2} dot={false} opacity={0.9} isAnimationActive={false} legendType="none" />
             )}
           </LineChart>
         </ResponsiveContainer>
       )}
 
-      {/* PANEL AÑO SELECCIONADO */}
       {!loading && selectedYear ? (
         <div className="mc-selected-panel">
           <div className="mc-selected-panel__header">
             <div>
               <div className="mc-selected-panel__age-label">Proyección a</div>
-              <div className="mc-selected-panel__age-value">
-                {selectedYear.age} <span className="mc-selected-panel__age-unit">años</span>
-              </div>
+              <div className="mc-selected-panel__age-value">{selectedYear.age} <span className="mc-selected-panel__age-unit">años</span></div>
             </div>
-            <button className="mc-selected-panel__clear-btn" onClick={() => setSelectedYear(null)}>
-              ✕ Limpiar selección
-            </button>
+            <button className="mc-selected-panel__clear-btn" onClick={() => setSelectedYear(null)}>✕ Limpiar selección</button>
           </div>
-
           <div className="mc-scenarios-grid">
             {SCENARIOS.map(({ key, label, sublabel, accent }) => (
-              <div
-                key={key}
-                className="mc-scenario-card"
-                style={{
-                  backgroundColor: `${accent}08`,
-                  border: `1px solid ${accent}22`,
-                }}
-              >
+              <div key={key} className="mc-scenario-card" style={{ backgroundColor: `${accent}08`, border: `1px solid ${accent}22` }}>
                 <div className="mc-scenario-card__title" style={{ color: accent }}>{label}</div>
                 <div className="mc-scenario-card__sublabel">{sublabel}</div>
-                <div className="mc-scenario-card__amount" style={{ color: accent }}>
-                  {Math.round(selectedYear[key]).toLocaleString('es-ES')} €
-                </div>
+                <div className="mc-scenario-card__amount" style={{ color: accent }}>{Math.round(selectedYear[key]).toLocaleString('es-ES')} €</div>
               </div>
             ))}
           </div>
         </div>
       ) : !loading && (
-        <div className="mc-no-selection">
-          Selecciona un punto en la gráfica para ver el análisis de escenarios
-        </div>
+        <div className="mc-no-selection">Selecciona un punto en la gráfica para ver el análisis de escenarios</div>
       )}
 
-      {/* TABLA DE ESTRÉS */}
       {!loading && (
         <div className="mc-stress-table-section">
           <h3>Tabla de Estrés Financiero (Proyección de Patrimonio)</h3>
@@ -362,12 +251,8 @@ const MonteCarloChart = () => {
                       {Math.round(esc.peor).toLocaleString('es-ES')} €{' '}
                       {isNegative && <span className="mc-stress-table__worst-tag">(Agotado)</span>}
                     </td>
-                    <td className="mc-stress-table__normal">
-                      {Math.round(esc.normal).toLocaleString('es-ES')} €
-                    </td>
-                    <td className="mc-stress-table__best">
-                      {Math.round(esc.mejor).toLocaleString('es-ES')} €
-                    </td>
+                    <td className="mc-stress-table__normal">{Math.round(esc.normal).toLocaleString('es-ES')} €</td>
+                    <td className="mc-stress-table__best">{Math.round(esc.mejor).toLocaleString('es-ES')} €</td>
                   </tr>
                 );
               })}
@@ -375,7 +260,6 @@ const MonteCarloChart = () => {
           </table>
         </div>
       )}
-
     </div>
   );
 };
