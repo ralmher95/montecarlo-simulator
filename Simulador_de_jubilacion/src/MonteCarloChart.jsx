@@ -51,6 +51,8 @@ const DEFAULT_PARAMS = {
   inflacion: 0.033,
 };
 
+const API_URL = 'https://montecarlo-simulator-63u9.onrender.com/api_datos.php';
+
 const MonteCarloChart = () => {
   const [params, setParams] = useState(DEFAULT_PARAMS);
   const [pendingParams, setPendingParams] = useState(DEFAULT_PARAMS);
@@ -73,10 +75,13 @@ const MonteCarloChart = () => {
       inflacion:       p.inflacion,
     }).toString();
 
-    fetch(`https://montecarlo-simulator-63u9.onrender.com/api_datos.php`)
-      .then(res => res.json())
+    fetch(`${API_URL}?${query}`)
+      .then(res => {
+        if (!res.ok) throw new Error(`HTTP error: ${res.status}`);
+        return res.json();
+      })
       .then(json => { setData(json); setLoading(false); })
-      .catch(err => { console.error(err); setLoading(false); });
+      .catch(err => { console.error('Fetch error:', err); setLoading(false); });
   }, []);
 
   useEffect(() => {
