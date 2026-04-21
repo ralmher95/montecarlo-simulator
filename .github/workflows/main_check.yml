@@ -25,7 +25,8 @@ jobs:
       - name: Install and Build
         run: |
           cd Simulador_de_jubilacion
-          npm install
+          rm -rf node_modules dist
+          npm ci
           npm run build
 
       - name: Setup Pages

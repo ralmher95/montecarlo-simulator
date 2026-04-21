@@ -60,28 +60,29 @@ const MonteCarloChart = () => {
   const [loading, setLoading] = useState(true);
   const [selectedYear, setSelectedYear] = useState(null);
 
- const query = new URLSearchParams({
-    ahorros: params.ahorros,
-    ahorro_anual: params.ahorro_anual,
-    años_jubilacion: params.años_jubilacion,
-    edad_jubilacion: params.edad_jubilacion,
-    edad_fin: params.edad_fin,
-    rentabilidad: params.rentabilidad,
-    volatilidad: params.volatilidad,
-    inflacion: params.inflacion
-}).toString();
+  const fetchData = useCallback((p) => {
+    setLoading(true);
+    setSelectedYear(null);
+    const query = new URLSearchParams({
+      ahorros:         p.ahorros,
+      ahorro_anual:    p.ahorro_anual,
+      gasto_anual:     p.gasto_anual,
+      edad_actual:     p.edad_actual,
+      edad_jubilacion: p.edad_jubilacion,
+      edad_fin:        p.edad_fin,
+      rentabilidad:    p.rentabilidad,
+      volatilidad:     p.volatilidad,
+      inflacion:       p.inflacion,
+    }).toString();
 
-// 2. Ahora sí, hacemos el fetch usando esa 'query'
-fetch(`${API_URL}?${query}`)
-    .then(res => {
+    fetch(`${API_URL}?${query}`)
+      .then(res => {
         if (!res.ok) throw new Error(`HTTP error: ${res.status}`);
         return res.json();
-    })
-    .then(json => {
-        setData(json);
-        setLoading(false);
-    })
-    .catch(err => console.error("Error al traer datos:", err));
+      })
+      .then(json => { setData(json); setLoading(false); })
+      .catch(err => { console.error('Fetch error:', err); setLoading(false); });
+  }, []);
 
   useEffect(() => {
     fetchData(params);
