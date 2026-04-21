@@ -73,7 +73,7 @@ const MonteCarloChart = () => {
       inflacion:       p.inflacion,
     }).toString();
 
-    fetch(`http://localhost/PHP/MONTECARLO/api_datos.php?${query}`)
+    fetch(`https://montecarlo-simulator-63u9.onrender.com/api_datos.php`)
       .then(res => res.json())
       .then(json => { setData(json); setLoading(false); })
       .catch(err => { console.error(err); setLoading(false); });
